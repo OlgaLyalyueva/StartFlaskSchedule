@@ -146,9 +146,3 @@ cython_debug/
 .idea/inspectionProfiles/
 .idea/misc.xml
 .idea/modules.xml
-StartFlask.py
-database.py
-forms.py
-models.py
-static/
-templates/
