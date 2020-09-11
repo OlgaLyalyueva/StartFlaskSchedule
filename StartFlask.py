@@ -51,7 +51,6 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(username):
     return User.query.filter_by(username=username).first()
-    # return session.query(User).filter_by(username).first()
 
 
 # @app.route('/login/', methods=['GET', 'POST'])
@@ -77,12 +76,15 @@ def load_user(username):
 def login():
     form = LoginForm(request.form)
     if request.method == 'POST':
-        if form.validate():
-            first_name = load_user(form.username.data)
-            print(first_name)
+        username = request.form['username']
+        password = request.form['password']
+        u = User.query.filter_by(username=username, password=password).first()
+        print(username, password, u)
+        if u is not None:
             return schedule()
         else:
-            return render_template('login.html')
+            error = 'Неправильный логин или пароль'
+            return render_template('login.html', form=form, error=error)
     return render_template('login.html', form=form)
 
 
