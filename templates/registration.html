@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="page">
+    <div id="page-bgtop">
+        <div id="page-bgbtm">
+            {% from "_formhelpers.html" import render_field %}
+            <form method="POST" action="{{ url_for('registration') }}">
+              <dl>
+                {{ render_field(form.first_name) }}
+                {{ render_field(form.last_name) }}
+                {{ render_field(form.username) }}
+                {{ render_field(form.email) }}
+                {{ render_field(form.password) }}
+                {{ render_field(form.confirm) }}
+              </dl>
+              <p><input type=submit value=Регистрация>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

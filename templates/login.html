@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="page">
+    <div id="page-bgtop">
+        <div id="page-bgbtm">
+            <form method="POST" action="{{ url_for('login') }}">
+                {{ form.csrf_token }}
+                {{ form.username.label }} {{ form.username() }}
+                {{ form.password.label }} {{ form.password() }}
+                <input type="submit" value="Отправить">
+            </form>
+            <a href="{{ url_for('registration')}}">Регистрация</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
