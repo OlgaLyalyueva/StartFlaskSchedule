@@ -96,7 +96,10 @@ def registration():
     return render_template('registration.html', form=form)
 
 
-
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('main'))
 
 
 with app.test_request_context():
