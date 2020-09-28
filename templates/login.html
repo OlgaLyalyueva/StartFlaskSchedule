@@ -4,6 +4,9 @@
     <div id="page-bgtop">
         <div id="page-bgbtm">
             <form method="POST" action="{{ url_for('login') }}">
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
                 {{ form.csrf_token }}
                 {{ form.username.label }} {{ form.username() }}
                 {{ form.password.label }} {{ form.password() }}
