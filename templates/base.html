@@ -25,7 +25,11 @@
 			<li><a href="{{ url_for('schedule')}}">Расписание занятий</a></li>
 			<li><a href="{{ url_for('notes')}}">Заметки</a></li>
 			<li><a href="{{ url_for('calendar')}}">Календарь</a></li>
-			<li><a href="{{ url_for('login')}}">Логин</a></li>
+			{% if current_user.is_authenticated %}
+				<li><a href="{{ url_for('logout')}}">Выход</a></li>
+			{% else %}
+				<li><a href="{{ url_for('login')}}">Логин</a></li>
+			{% endif %}
 		</ul>
 	</div>
 	<!-- end #menu -->
