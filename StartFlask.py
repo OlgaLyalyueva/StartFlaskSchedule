@@ -5,7 +5,7 @@ from forms import RegistrationForm, LoginForm
 from models import User, generate_password_hash, check_password_hash
 from database import db_session, init_db
 from sqlalchemy.orm import query
-
+from flask_login import current_user
 
 app = Flask(__name__)
 app.secret_key = b'\xcb6\x836\xf6\xdd\xadl\x0fB\xb8\x14\xaa\xd3\r>'
@@ -74,11 +74,23 @@ def login():
 def registration():
     form = RegistrationForm(request.form)
     if request.method == 'POST': # and form.validate()
-        init_db()
-        user = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data, email=form.email.data, password=form.password.data)
-        db_session.add(user)
-        db_session.commit()
-        flash('Thanks for registering')
+        username = request.form['username']
+        useremail = request.form['email']
+        user_name = User.query.filter_by(username=username).first()
+        user_email = User.query.filter_by(email=useremail).first()
+        if user_name is not None:
+            error = f'Пользователь с именем: {username} уже существует'
+            return render_template('registration.html', form=form, error=error)
+        elif user_email is not None:
+            error = f'Пользователь с {useremail} уже существует'
+            return render_template('registration.html', form=form, error=error)
+        else:
+            init_db()
+            gener_password_hash = generate_password_hash(form.password.data)
+            create_user = User(first_name=form.first_name.data, last_name=form.last_name.data, username=form.username.data, email=form.email.data, password=gener_password_hash)
+            db_session.add(create_user)
+            db_session.commit()
+
         return redirect(url_for('login'))
 
     return render_template('registration.html', form=form)

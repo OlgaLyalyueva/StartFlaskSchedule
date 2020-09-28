@@ -5,6 +5,9 @@
         <div id="page-bgbtm">
             {% from "_formhelpers.html" import render_field %}
             <form method="POST" action="{{ url_for('registration') }}">
+                {% if error %}
+                    <p>{{ error }}</p>
+                {% endif %}
               <dl>
                 {{ render_field(form.first_name) }}
                 {{ render_field(form.last_name) }}
