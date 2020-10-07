@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="page">
+    <div id="page-bgtop">
+        <div id="page-bgbtm">
+            <h1>Notes</h1>
+            {% if current_user.is_authenticated %}
+                {% if url %}
+                    <form method="POST" action="{{ url_for('main.add_note') }}">
+                        {% if error %}
+                            <p>{{ error }}</p>
+                        {% endif %}
+                        {{ form.csrf_token }}
+                        {{ form.description.label }} {{ form.description() }}
+                        <input type="submit" value="Сохранить">
+                    </form>
+                {% else %}
+                    <a href="{{ url_for('main.add_note')}}">+ Добавь новую заметку </a>
+                {% endif %}
+                {% for note in notes %}
+                    <p>{{ note.description }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <p>note</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

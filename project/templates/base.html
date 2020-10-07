@@ -21,14 +21,14 @@
 	<!-- end #header -->
 	<div id="menu">
 		<ul>
-			<li class="current_page_item"><a href="{{ url_for('main')}}">Главная</a></li>
-			<li><a href="{{ url_for('schedule')}}">Расписание занятий</a></li>
-			<li><a href="{{ url_for('notes')}}">Заметки</a></li>
-			<li><a href="{{ url_for('calendar')}}">Календарь</a></li>
+			<li class="current_page_item"><a href="{{ url_for('main.index')}}">Главная</a></li>
+			<li><a href="{{ url_for('main.schedule')}}">Расписание занятий</a></li>
+			<li><a href="{{ url_for('main.notes')}}">Заметки</a></li>
+			<li><a href="{{ url_for('main.calendar')}}">Календарь</a></li>
 			{% if current_user.is_authenticated %}
-				<li><a href="{{ url_for('logout')}}">Выход</a></li>
+				<li><a href="{{ url_for('auth.logout')}}">Выход</a></li>
 			{% else %}
-				<li><a href="{{ url_for('login')}}">Логин</a></li>
+				<li><a href="{{ url_for('auth.login')}}">Логин</a></li>
 			{% endif %}
 		</ul>
 	</div>

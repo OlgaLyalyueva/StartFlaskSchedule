@@ -4,10 +4,12 @@
     <div id="page-bgtop">
         <div id="page-bgbtm">
             {% from "_formhelpers.html" import render_field %}
-            <form method="POST" action="{{ url_for('registration') }}">
-                {% if error %}
-                    <p>{{ error }}</p>
+            <form method="POST" action="{{ url_for('auth.registration') }}">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <p>{{ messages[0] }}</p>
                 {% endif %}
+                {% endwith %}
               <dl>
                 {{ render_field(form.first_name) }}
                 {{ render_field(form.last_name) }}

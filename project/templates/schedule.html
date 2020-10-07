@@ -11,6 +11,9 @@
   <header class="cd-main-header text-center flex flex-column flex-center">
     <br/>
     <h1 class="text-xl">Расписание на неделю</h1>
+    {% if current_user.is_authenticated %}
+      <a href="{{ url_for('main.add_event')}}">+ Добавь событие в твое расписание</a>
+    {% endif %}
   </header>
   <div id="page">
 		<div id="page-bgtop">
